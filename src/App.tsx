@@ -16,7 +16,7 @@ function App() {
   // JavaScript/TypeScript code can be inserted here!
   const [cats, setCats] = useState<Array<Cat>>(catData);
   const [dogs, setDogs] = useState<Array<Dog>>(dogData);
-  
+
   cats.forEach((cat, index) => {
     const id = uuidv4();
     cat.id = id;
@@ -30,10 +30,36 @@ function App() {
   const catCount = cats.length;
   const dogCount = dogs.length;
 
-  return (  
+  function addNewCard(cardType: String, newCard: Cat) {
+    if (cardType === "cat") {
+      setCats([
+        ...cats,
+        {
+          name: newCard.name,
+          species: newCard.species,
+          favFoods: newCard.favFoods,
+          birthYear: newCard.birthYear,
+          id: uuidv4(),
+        },
+      ]);
+    } else {
+      setDogs([
+        ...dogs,
+        {
+          name: newCard.name,
+          species: newCard.species,
+          favFoods: newCard.favFoods,
+          birthYear: newCard.birthYear,
+          id: uuidv4(),
+        },
+      ]);
+    }
+  }
+
+  return (
     <>
       <Navbar />
-      <Header catCount={catCount} dogCount={dogCount}  />
+      <Header catCount={catCount} dogCount={dogCount} />
 
       <main>
         <div className="cards__wrapper">
@@ -51,7 +77,7 @@ function App() {
         <div className="cards__wrapper">
           {dogs.map((dog, index) => (
             <CatCard
-            key={dog.id}
+              key={dog.id}
               name={dog.name}
               species={dog.species}
               favFoods={dog.favFoods}
@@ -59,11 +85,10 @@ function App() {
             />
           ))}
         </div>
-         <AddCard />
-        
+        <AddCard  />
       </main>
-      
-      <Footer />    
+
+      <Footer />
     </>
   );
 }
