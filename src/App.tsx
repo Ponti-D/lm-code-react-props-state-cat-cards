@@ -59,7 +59,7 @@ function App() {
             />
           ))}
         </div>
-        <AddCard  />
+         <AddCard />
         
       </main>
       
